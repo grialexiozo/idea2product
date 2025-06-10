@@ -2,18 +2,15 @@
 
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
-import { useTranslations } from 'next-intl';
 
 import { cn } from "@/lib/utils"
 
 const Tabs = TabsPrimitive.Root
 
-const t = useTranslations('Tabs');
-
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> & { t?: (key: string) => string }
+>(({ className, t, ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
     className={cn(
@@ -27,8 +24,8 @@ TabsList.displayName = TabsPrimitive.List.displayName
 
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> & { t?: (key: string) => string }
+>(({ className, t, ...props }, ref) => (
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(

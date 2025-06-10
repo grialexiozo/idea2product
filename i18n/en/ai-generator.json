@@ -16,5 +16,6 @@
   "downloadButton": "Download",
   "shareButton": "Share",
   "waitingForCreation": "Waiting for creation...",
-  "creationHint": "Your AI generated image will appear here."
+  "creationHint": "Your AI generated image will appear here.",
+  "generatedImageAlt": "Generated Image"
 }

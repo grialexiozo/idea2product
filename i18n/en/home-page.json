@@ -14,5 +14,21 @@
   "ctaTitle": "Ready to launch your SaaS?",
   "ctaDescription": "Our template provides everything you need to get your SaaS up and running quickly. Don't waste time on boilerplate - focus on what makes your product unique.",
   "viewCodeButton": "View the code",
-  "usageDataTitle": "Usage Data (Simulated)"
+  "usageDataTitle": "Usage Data (Simulated)",
+  "heroTitlePart1": "Build your next AI product",
+  "heroTitlePart2": "with speed and confidence",
+  "heroDescriptionLine1": "Launch your SaaS product in record time with our powerful, ready-to-use template.",
+  "heroDescriptionLine2": "Packed with modern technologies and essential integrations.",
+  "startButton": "Get Started",
+  "viewPlansButton": "View Plans",
+  "featuresTitle": "Features",
+  "featuresDescription": "Everything you need to launch and scale your SaaS.",
+  "stat1Value": "100+",
+  "stat1Label": "Active Users",
+  "stat2Value": "99.99%",
+  "stat2Label": "Uptime",
+  "stat3Value": "5 min",
+  "stat3Label": "Setup Time",
+  "stat4Value": "24/7",
+  "stat4Label": "Support"
 }

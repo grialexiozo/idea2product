@@ -36,7 +36,7 @@ const nextConfig = {
     ppr: true,
     clientSegmentCache: true,
     nodeMiddleware: true,
-    forceSwcTransforms: true,
+    forceSwcTransforms: false,
   },
   // Development environment optimization
   onDemandEntries: {

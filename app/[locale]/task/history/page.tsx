@@ -2,7 +2,7 @@ import Navbar from "@/components/navbar"
 import { TaskHistoryClient } from "@/components/task/task-history-client"
 import { getTasks } from "@/app/actions/task/get-tasks"
 import { TaskStatusType } from "@/lib/types/task/enum.bean"
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 interface HistoryPageProps {
   searchParams: Promise<{ 
@@ -13,10 +13,10 @@ interface HistoryPageProps {
 const ITEMS_PER_PAGE = 10; // Define items per page
 
 export default async function HistoryPage({ searchParams }: HistoryPageProps) {
-  const t = useTranslations('TaskHistoryPage');
+  const t = await getTranslations('TaskHistoryPage');
   // Ensure searchParams are parsed
   const params = await searchParams;
-  const currentPage = parseInt(params.page as string || t('currentPageDefault'));
+  const currentPage = parseInt(params.page as string || "1"); // 直接用数字默认值
   const currentSearch = params.search as string | undefined;
   const currentStatus = params.status as TaskStatusType | undefined;
 

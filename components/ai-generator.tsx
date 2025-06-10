@@ -17,7 +17,7 @@ export default function AIGenerator() {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null)
   const [textPrompt, setTextPrompt] = useState("")
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
-  const t = useTranslations('AIGenerator'); // Assuming an 'AIGenerator' namespace for translations
+  const t = useTranslations('AiGenerator');
 
   const handleGenerate = async () => {
     setIsGenerating(true)
@@ -52,10 +52,11 @@ export default function AIGenerator() {
         </CardHeader>
         <CardContent className="space-y-6">
           <Tabs defaultValue="text-to-image" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-slate-700/50 p-1">
+            <TabsList className="grid w-full grid-cols-2 bg-slate-700/50 p-1" t={t}>
               <TabsTrigger
                 value="text-to-image"
                 className="data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all duration-200"
+                t={t}
               >
                 <Sparkles className="w-4 h-4 mr-2" />
                 {t('textToImageTab')}
@@ -63,6 +64,7 @@ export default function AIGenerator() {
               <TabsTrigger
                 value="image-to-image"
                 className="data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all duration-200"
+                t={t}
               >
                 <Upload className="w-4 h-4 mr-2" />
                 {t('imageToImageTab')}
