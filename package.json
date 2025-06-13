@@ -115,6 +115,7 @@
     "buffer": "^6.0.3",
     "chokidar": "^4.0.3",
     "crypto-browserify": "^3.12.1",
+    "dotenv-cli": "^8.0.0",
     "drizzle-kit": "^0.31.1",
     "eslint": "^8.49.0",
     "eslint-config-next": "13.5.4",
@@ -127,6 +128,7 @@
     "prettier": "^3.0.3",
     "stream-browserify": "^3.0.0",
     "tailwindcss": "4.1.7",
+    "ts-jest": "^29.3.4",
     "typescript": "^5.8.3"
   }
 }
