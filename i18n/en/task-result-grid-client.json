@@ -13,5 +13,6 @@
   "startYourFirstCreation": "Start your first creation to see results here!",
   "previous": "Previous",
   "next": "Next",
-  "breakLabel": "..."
+  "breakLabel": "...",
+  "loading": "Loading..."
 }

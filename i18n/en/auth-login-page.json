@@ -1,5 +1,6 @@
 {
-  "signInTitle": "Sign in to your account",
+  "welcomeBack": "Welcome back",
+  "signInToAccount": "Sign in to your account",
   "userLoggedIn": "User already logged in, redirecting...",
   "emailLabel": "Email address",
   "emailPlaceholder": "Email address",
@@ -26,7 +27,5 @@
   "termsOfService": "Terms of Service",
   "and": "and",
   "privacyPolicy": "Privacy Policy",
-  "goHome": "Go Home",
-  "welcomeBack": "Welcome back!",
-  "signInToAccount": "Sign in to your account"
+  "goHome": "Go Home"
 }
