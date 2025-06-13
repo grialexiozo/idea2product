@@ -17,5 +17,7 @@
   "currentAvatar": "Current Avatar",
   "uploadAvatarLabel": "Upload New Avatar",
   "fileSizeExceedsLimit": "File size exceeds the 2MB limit.",
-  "unsetValue": "Not Set"
+  "unsetValue": "Not Set",
+  "welcomeBack": "Welcome back!",
+  "signInToAccount": "Sign in to your account"
 }

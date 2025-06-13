@@ -5,5 +5,7 @@
   "autoLoginFailed": "Auto-login failed. Please try again.",
   "invalidParams": "Invalid auto login parameters.",
   "goHome": "Go to Homepage",
-  "anErrorOccurred": "An error occurred. Please try again."
+  "anErrorOccurred": "An error occurred. Please try again.",
+  "welcomeBack": "Welcome back!",
+  "signInToAccount": "Sign in to your account"
 }

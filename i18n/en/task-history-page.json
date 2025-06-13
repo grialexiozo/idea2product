@@ -1,3 +1,10 @@
 {
-  "currentPageDefault": "1"
+  "currentPageDefault": "1",
+  "title": "Task History",
+  "searchPlaceholder": "Search Task",
+  "statusFilter": "Status Filter",
+  "all": "All",
+  "pending": "Pending",
+  "completed": "Completed",
+  "failed": "Failed"
 }
