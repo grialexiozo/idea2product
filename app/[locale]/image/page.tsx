@@ -9,20 +9,26 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import useSWR from "swr";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getCurrentUserProfile } from "@/app/actions/auth/get-user-info";
 import { useEffect, useState } from "react";
 import { styles } from "@/config/styles";
 
 export default function ImageGenerationPage() {
   const t = useTranslations("Styles");
+  const searchParams = useSearchParams();
   const [selectedId, setSelectedId] = useState<string>(styles[0]?.id);
 
   useEffect(() => {
-    if (!selectedId && styles.length > 0) {
+    // 页面加载时读取id参数
+    const urlId = searchParams.get("id");
+    if (urlId && styles.some(s => s.id === urlId)) {
+      setSelectedId(urlId);
+    } else if (!selectedId && styles.length > 0) {
       setSelectedId(styles[0].id);
     }
-  }, [selectedId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const selectedStyle = styles.find((s) => s.id === selectedId) || styles[0];
 
