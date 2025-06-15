@@ -35,7 +35,7 @@ export default function ImageGenerationPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       <Navbar />
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-6 py-16">
         <div className="flex flex-row w-full bg-transparent rounded-3xl shadow-2xl">
           {/* 左侧风格选择栏 */}
           <aside className="w-80 bg-slate-900/80 border-r border-slate-800 flex flex-col rounded-l-3xl shadow-xl" style={{ maxHeight: 'calc(100vh - 64px)' }}>
@@ -60,9 +60,9 @@ export default function ImageGenerationPage() {
             </div>
           </aside>
           {/* 右侧主内容区 */}
-          <main className="w-full flex  bg-transparent rounded-r-2xl">
+          <main className="w-full flex bg-transparent rounded-tr-2xl rounded-br-2xl">
             {/* 操作卡片 */}
-            <div className="flex-1 bg-slate-800/80 rounded-2xl shadow-xl p-10 flex flex-col">
+            <div className="flex-1 bg-slate-800/80 rounded-tr-2xl rounded-br-2xl shadow-xl p-10 flex flex-col">
               <div className="flex items-center gap-6 mb-10">
                 <img src={selectedStyle.previewImage} alt={t(selectedStyle.id + '.name')} className="w-20 h-20 rounded-xl object-cover" />
                 <div>
