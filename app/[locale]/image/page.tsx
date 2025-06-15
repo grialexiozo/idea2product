@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { styles } from "@/config/styles";
 
 export default function ImageGenerationPage() {
-  const t = useTranslations("styles");
+  const t = useTranslations("Styles");
   const [selectedId, setSelectedId] = useState<string>(styles[0]?.id);
 
   useEffect(() => {
@@ -45,8 +45,8 @@ export default function ImageGenerationPage() {
                   }`}
                   onClick={() => setSelectedId(style.id)}
                 >
-                  <img src={style.previewImage} alt={t(style.nameKey)} className="w-14 h-14 rounded-lg object-cover" />
-                  <span className="font-semibold text-lg truncate">{t(style.nameKey)}</span>
+                  <img src={style.previewImage} alt={t(`${style.id}.name`)} className="w-14 h-14 rounded-lg object-cover" />
+                  <span className="font-semibold text-lg truncate">{t(`${style.id}.name`)}</span>
                 </button>
               ))}
             </div>
@@ -56,10 +56,10 @@ export default function ImageGenerationPage() {
             {/* 操作卡片 */}
             <div className="flex-1 bg-slate-800/80 rounded-2xl shadow-xl p-10 flex flex-col">
               <div className="flex items-center gap-6 mb-10">
-                <img src={selectedStyle.previewImage} alt={t(selectedStyle.nameKey)} className="w-20 h-20 rounded-xl object-cover" />
+                <img src={selectedStyle.previewImage} alt={t(selectedStyle.id + '.name')} className="w-20 h-20 rounded-xl object-cover" />
                 <div>
-                  <h1 className="text-3xl font-bold text-white mb-2">{t(selectedStyle.nameKey)}</h1>
-                  <p className="text-slate-300 text-lg">{t(selectedStyle.descriptionKey)}</p>
+                  <h1 className="text-3xl font-bold text-white mb-2">{t(selectedStyle.id + '.name')}</h1>
+                  <p className="text-slate-300 text-lg">{t(selectedStyle.id + '.description')}</p>
                 </div>
               </div>
               <AIGenerator selectedStyle={selectedStyle} />

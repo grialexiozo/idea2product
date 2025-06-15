@@ -41,14 +41,14 @@ export const styles = [
     "previewImage": "/styles/image5.png",
     "isMulti": false
   },
-  {
-    "id": "modelProductFusion",
-    "nameKey": "styles.modelProductFusion.name",
-    "descriptionKey": "styles.modelProductFusion.description",
-    "prompt": "The change involved a woman holding a blue bag for a live stream display, maintaining the consistency of the character unchanged",
-    "previewImage": "/styles/image6.png",
-    "isMulti": true
-  },
+  // {
+  //   "id": "modelProductFusion",
+  //   "nameKey": "styles.modelProductFusion.name",
+  //   "descriptionKey": "styles.modelProductFusion.description",
+  //   "prompt": "The change involved a woman holding a blue bag for a live stream display, maintaining the consistency of the character unchanged",
+  //   "previewImage": "/styles/image6.png",
+  //   "isMulti": true
+  // },
   {
     "id": "nailArt",
     "nameKey": "styles.nailArt.name",

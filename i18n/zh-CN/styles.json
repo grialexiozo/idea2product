@@ -1,4 +1,5 @@
 {
+  "sceneSelectTitle": "选择场景",
   "photoRestoration": {
     "name": "老照片修复",
     "description": "一键修复破损、模糊、褪色的老照片，恢复高清彩色效果。"
