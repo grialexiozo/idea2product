@@ -1,0 +1,82 @@
+{
+  "photoRestoration": {
+    "name": "Photo Restoration",
+    "description": "Restore damaged, blurry, or faded old photos to high-definition color images with one click."
+  },
+  "styleTransfer": {
+    "name": "Style Transfer",
+    "description": "Support multiple mainstream style transfers, keep the character and pose unchanged, easily achieve various styles such as Chinese painting and comics."
+  },
+  "imageFusion": {
+    "name": "Image Fusion & Group Portrait",
+    "description": "Intelligently synthesize multiple portraits into one group photo, keeping facial features, hairstyle, and expression consistent."
+  },
+  "productShowcase": {
+    "name": "Product Showcase & Background Replacement",
+    "description": "Intelligently blend products and backgrounds, support e-commerce product display, background replacement, lighting fusion, and more."
+  },
+  "modelProductFusion": {
+    "name": "Model & Product Fusion for E-commerce",
+    "description": "Naturally blend products with models, suitable for e-commerce live streaming and product promotion, maintaining character consistency and enhancing display effect."
+  },
+  "furnitureShowcase": {
+    "name": "3-Image Fusion · Furniture Showcase",
+    "description": "Intelligently blend people, pets, and furniture scenes, with highly consistent details, suitable for home, soft furnishing, and space display."
+  },
+  "nailArt": {
+    "name": "Nail Art Design",
+    "description": "Intelligently generate nail art patterns, beautify only the nails, keep other parts of the hand natural, suitable for nail design and display."
+  },
+  "backgroundReplacement": {
+    "name": "Background Replacement for Portraits",
+    "description": "Intelligently replace the background of portraits, keeping the subject's pose and details unchanged, suitable for theme switching and scene composition."
+  },
+  "objectRemoval": {
+    "name": "Object & Watermark Removal",
+    "description": "Intelligently remove watermarks, text, or unwanted objects from images, keeping all other details unchanged, suitable for image purification and content optimization."
+  },
+  "ipAdapterStyleTransfer": {
+    "name": "IP-Adapter Style Transfer",
+    "description": "Automatically transfer style based on reference images, with rich details and highly consistent style, suitable for artistic creation and style imitation."
+  },
+  "addModelToClothing": {
+    "name": "Add Model to Clothing for E-commerce",
+    "description": "Naturally blend models into clothing images, keeping clothing details unchanged, suitable for e-commerce clothing display and try-on effect generation."
+  },
+  "partialEdit": {
+    "name": "Partial Edit",
+    "description": "Only adjust the specified local area in the image (such as hair color, clothing, accessories, etc.), keeping other parts unchanged to meet personalized needs."
+  },
+  "cartoonAvatar": {
+    "name": "Cartoon Avatar Generation",
+    "description": "Generate personalized cartoon avatars from real photos, suitable for social media, games, and more."
+  },
+  "idPhoto": {
+    "name": "ID Photo Generation",
+    "description": "Create compliant ID photos with one click, support background replacement, clothing change, and beauty enhancement."
+  },
+  "sketch": {
+    "name": "Hand-drawn Sketch",
+    "description": "Convert photos into hand-drawn sketches, highlight lines and artistic style, suitable for creative design."
+  },
+  "posterDesign": {
+    "name": "Poster Design",
+    "description": "Intelligently generate creative posters for marketing, events, and more, support various styles and layouts."
+  },
+  "comicStrip": {
+    "name": "Comic Strip Generation",
+    "description": "Turn photos into comic strips, support multi-panel layout and speech bubbles, suitable for storytelling."
+  },
+  "sceneExpansion": {
+    "name": "Scene Expansion",
+    "description": "Expand the background and scene of the image, keep the main subject unchanged, suitable for creative extension."
+  },
+  "artQRCode": {
+    "name": "Artistic QR Code",
+    "description": "Generate artistic QR codes with embedded images, support various styles and high recognition."
+  },
+  "creativeCollage": {
+    "name": "Creative Collage",
+    "description": "Combine multiple images into a creative collage, support free layout and rich templates."
+  }
+} 

@@ -7,63 +7,63 @@ import { useState, useEffect } from "react";
 // AI Image Styles
 const styles = [
   {
-    id: "photo-restoration",
+    id: "photoRestoration",
     nameKey: "styles.photoRestoration.name",
     descriptionKey: "styles.photoRestoration.description",
     prompt: "restore and colorize this photo. Repair the damaged white background. Maintain the consistency between the characters and the background",
     previewImage: "/styles/image1.png"
   },
   {
-    id: "style-transfer",
+    id: "styleTransfer",
     nameKey: "styles.styleTransfer.name",
     descriptionKey: "styles.styleTransfer.description",
     prompt: "Transform to $Style$, while maintaining women and pose unchanged",
     previewImage: "/styles/image2.png"
   },
   {
-    id: "image-fusion",
+    id: "imageFusion",
     nameKey: "styles.imageFusion.name",
     descriptionKey: "styles.imageFusion.description",
     prompt: "Change image to the man and women to hug together, while maintaining the same facial features, hairstyle, and expression",
     previewImage: "/styles/image3.png"
   },
   {
-    id: "model-product-fusion",
+    id: "modelProductFusion",
     nameKey: "styles.modelProductFusion.name",
     descriptionKey: "styles.modelProductFusion.description",
     prompt: "The change involved a woman holding a blue bag for a live stream display, maintaining the consistency of the character unchanged",
     previewImage: "/styles/image4.png"
   },
   {
-    id: "product-showcase",
+    id: "productShowcase",
     nameKey: "styles.productShowcase.name",
     descriptionKey: "styles.productShowcase.description",
     prompt: "Place the item in the picture on the table. Keep the items, the table and the background unchanged.",
     previewImage: "/styles/image5.png"
   },
   {
-    id: "model-product-fusion",
+    id: "modelProductFusion",
     nameKey: "styles.modelProductFusion.name",
     descriptionKey: "styles.modelProductFusion.description",
     prompt: "The change involved a woman holding a blue bag for a live stream display, maintaining the consistency of the character unchanged",
     previewImage: "/styles/image6.png"
   },
   {
-    id: "furniture-showcase",
+    id: "furnitureShowcase",
     nameKey: "styles.furnitureShowcase.name",
     descriptionKey: "styles.furnitureShowcase.description",
     prompt: "The character is sitting cross-legged on the sofa, and the Dalmatian is lying on the blanket sleeping.",
     previewImage: "/styles/image7.png"
   },
   {
-    id: "nail-art",
+    id: "nailArt",
     nameKey: "styles.nailArt.name",
     descriptionKey: "styles.nailArt.description",
     prompt: "Make a nail art pattern on the fingernails. Nail Art, $style$ Printed pattern on Nail Art, beautiful, bright, comforting, soft lighting. Do not make any changes except for your fingernails.",
     previewImage: "/styles/image8.png"
   },
   {
-    id: "background-replacement",
+    id: "backgroundReplacement",
     nameKey: "styles.backgroundReplacement.name",
     descriptionKey: "styles.backgroundReplacement.description",
     prompt: "Change the background to in the classroom of the school, keep the subject in the exact same position and pose",
@@ -71,7 +71,7 @@ const styles = [
   },
 
   {
-    id: "object-removal",
+    id: "objectRemoval",
     nameKey: "styles.objectRemoval.name",
     descriptionKey: "styles.objectRemoval.description",
     prompt: "Remove the watermarks and text from the picture, while keeping all other details unchanged",
@@ -79,14 +79,14 @@ const styles = [
   },
 
   {
-    id: "ip-adapter-style-transfer",
+      id: "ipAdapterStyleTransfer",
     nameKey: "styles.ipAdapterStyleTransfer.name",
     descriptionKey: "styles.ipAdapterStyleTransfer.description",
     prompt: "Using this image style, a woman and a man are looking up at the sky by the stream, 18-years-old",
     previewImage: "/styles/image11.png"
   },
   {
-    id: "partial-edit",
+    id: "partialEdit",
     nameKey: "styles.partialEdit.name",
     descriptionKey: "styles.partialEdit.description",
     prompt: "Partial adjustment, only modify the selected part (e.g. hair color, clothes, accessories), keep all other details unchanged.",
@@ -95,7 +95,7 @@ const styles = [
 ];
 
 export function StyleGallery() {
-  const t = useTranslations("HomePage");
+  const t = useTranslations("Styles");
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselItems = styles.slice(0, 5);
 
@@ -183,8 +183,8 @@ export function StyleGallery() {
           <StyleCard
             key={style.id}
             id={style.id}
-            name={t(style.nameKey)}
-            description={t(style.descriptionKey)}
+            name={t(`${style.id}.name`)}
+            description={t(`${style.id}.description`)}
             prompt={style.prompt}
             previewImage={style.previewImage}
           />

@@ -1,0 +1,21 @@
+{
+  "title": "个人信息",
+  "email": "邮箱",
+  "username": "用户名",
+  "editProfile": "编辑资料",
+  "changePassword": "修改密码",
+  "currentPlan": "当前套餐",
+  "upgradePlan": "升级套餐",
+  "subscriptionStatus": "订阅状态",
+  "active": "已激活",
+  "inactive": "未激活",
+  "cancelSubscription": "取消订阅",
+  "renewSubscription": "续费",
+  "subscriptionEnd": "订阅到期时间",
+  "viewHistory": "查看历史记录",
+  "logout": "退出登录",
+  "save": "保存",
+  "cancel": "取消",
+  "success": "保存成功",
+  "error": "保存失败，请重试"
+} 

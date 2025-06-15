@@ -1,0 +1,82 @@
+{
+  "photoRestoration": {
+    "name": "老照片修复",
+    "description": "一键修复破损、模糊、褪色的老照片，恢复高清彩色效果。"
+  },
+  "styleTransfer": {
+    "name": "风格转绘",
+    "description": "支持多种主流风格转绘，保持人物和姿势不变，轻松实现国画、漫画等多样化风格转换。"
+  },
+  "imageFusion": {
+    "name": "多图融合·人物合影",
+    "description": "多张人物照片智能合成一张合影，保持五官、发型、表情一致，轻松实现虚拟合影、场景融合。"
+  },
+  "productShowcase": {
+    "name": "多图融合·电商商品展示/换背景",
+    "description": "智能融合商品与背景，支持电商商品展示、背景替换、光效融合等多种场景。"
+  },
+  "modelProductFusion": {
+    "name": "多图体验·电商模特带货",
+    "description": "将商品与模特自然融合，适用于电商直播、带货等场景，保持人物特征一致，提升展示效果。"
+  },
+  "furnitureShowcase": {
+    "name": "3图融合·家具展示",
+    "description": "将人物、宠物与家具场景智能融合，细节高度一致，适用于家居、软装、空间展示等多种场景。"
+  },
+  "nailArt": {
+    "name": "美甲艺术",
+    "description": "智能生成美甲图案，仅对指甲进行美化，保持手部其他部分自然不变，适合美甲设计、展示等场景。"
+  },
+  "backgroundReplacement": {
+    "name": "人物换背景",
+    "description": "智能更换人物背景，保持主体姿势和细节不变，适用于主题切换、场景合成等多种应用。"
+  },
+  "objectRemoval": {
+    "name": "物体移除·去除水印",
+    "description": "智能去除图片中的水印、文字或多余物体，保持画面其他细节不变，适用于图片净化、内容优化等场景。"
+  },
+  "ipAdapterStyleTransfer": {
+    "name": "IP-Adapter·风格迁移",
+    "description": "根据参考图片自动迁移风格，细节丰富，画面风格高度一致，适用于艺术创作、风格仿画等场景。"
+  },
+  "addModelToClothing": {
+    "name": "电商服装增加模特",
+    "description": "将模特自然融合到服装图片中，衣服细节保持不变，适用于电商服装展示、上身效果图生成等场景。"
+  },
+  "partialEdit": {
+    "name": "局部调整",
+    "description": "只调整图片中指定的局部区域（如发色、服装、配饰等），其余部分保持不变，精准满足个性化需求。"
+  },
+  "cartoonAvatar": {
+    "name": "卡通头像生成",
+    "description": "将真人照片生成个性化卡通头像，适用于社交、游戏等多种场景。"
+  },
+  "idPhoto": {
+    "name": "证件照生成",
+    "description": "一键生成合规证件照，支持换底色、换服装、美颜等功能。"
+  },
+  "sketch": {
+    "name": "手绘素描",
+    "description": "将照片转为手绘素描，突出线条与艺术风格，适合创意设计。"
+  },
+  "posterDesign": {
+    "name": "海报设计",
+    "description": "智能生成创意海报，适用于营销、活动等多种场景，支持多种风格与版式。"
+  },
+  "comicStrip": {
+    "name": "漫画分镜生成",
+    "description": "将照片转为漫画分镜，支持多格布局与气泡，适合故事创作。"
+  },
+  "sceneExpansion": {
+    "name": "场景扩展",
+    "description": "扩展图片的背景和场景，主体保持不变，适合创意延展。"
+  },
+  "artQRCode": {
+    "name": "艺术二维码",
+    "description": "生成带有嵌入图片的艺术二维码，支持多种风格，高识别度。"
+  },
+  "creativeCollage": {
+    "name": "创意拼贴",
+    "description": "多图自由拼贴，支持丰富模板和自由布局，打造个性化创意作品。"
+  }
+} 
