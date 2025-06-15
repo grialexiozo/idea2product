@@ -23,7 +23,7 @@ export default function HomePage() {
     try {
       const userInfo = await getCurrentUserProfile();
       if (userInfo?.id) {
-        toast("Try generating images at the bottom of the page");
+        router.push('/image');
       } else {
         router.push('/login');
       }
@@ -60,7 +60,7 @@ export default function HomePage() {
                 {t("startButton")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button
+              {/* <Button
                 size="lg"
                 variant="outline"
                 asChild
@@ -69,7 +69,7 @@ export default function HomePage() {
                   <Star className="mr-2 h-5 w-5" />
                   {t("viewPlansButton")}
                 </Link>
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
