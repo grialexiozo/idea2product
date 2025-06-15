@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar";
 import AIGenerator from "@/components/ai-generator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Zap, Rocket, Shield, ArrowRight, Star } from "lucide-react";
+import { Zap, Rocket, Shield, ArrowRight, Star, Palette } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import useSWR from "swr";
@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { getCurrentUserProfile } from "@/app/actions/auth/get-user-info";
 import { useEffect, useState } from "react";
+import { StyleGallery } from "@/components/style-gallery/style-gallery";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
@@ -126,6 +127,24 @@ export default function HomePage() {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Style Gallery Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mx-auto mb-6">
+              <Palette className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              {t("styleGalleryTitle")}
+            </h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              {t("styleGalleryDescription")}
+            </p>
+          </div>
+          <StyleGallery />
         </div>
       </section>
 
