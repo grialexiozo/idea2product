@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Download, Share2, Wand2, Upload, Sparkles, AlertCircle } from "lucide-react";
+import { Loader2, Download, Share2, Wand2, Upload, Sparkles, AlertCircle, Plus } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -41,6 +41,10 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
   const [strength, setStrength] = useState<number>(0.8);
   const [seed, setSeed] = useState<number>(-1);
   const [advancedSettingsOpen, setAdvancedSettingsOpen] = useState(false);
+
+  // 新增本地预览 state
+  const [localPreview, setLocalPreview] = useState<string | null>(null);
+  const [localPreview2, setLocalPreview2] = useState<string | null>(null);
 
   const t = useTranslations("AiGenerator");
 
@@ -181,14 +185,14 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
     }
   };
 
+  // 修改handleImageUpload，支持本地预览
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
-    // Preview image
+    // 本地预览
     const reader = new FileReader();
     reader.onload = (e) => {
-      setUploadedImage(e.target?.result as string);
+      setLocalPreview(e.target?.result as string);
     };
     reader.readAsDataURL(file);
 
@@ -269,14 +273,13 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
     }
   };
 
+  // handleImageUpload2 同理
   const handleImageUpload2 = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
-    // Preview image
     const reader = new FileReader();
     reader.onload = (e) => {
-      setUploadedImage2(e.target?.result as string);
+      setLocalPreview2(e.target?.result as string);
     };
     reader.readAsDataURL(file);
 
@@ -384,55 +387,62 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div>
-            <Label htmlFor="image-upload" className="text-slate-200 font-medium mb-2">
-              {t("imageToImageUploadLabel")}
-            </Label>
-            <div className="relative">
-              <Input
+          <div className="flex gap-6">
+            {/* 单图或多图上传卡片 */}
+            <label htmlFor="image-upload" className="flex-1 cursor-pointer">
+              <div className="flex flex-col items-center justify-center border-2 border-slate-600 rounded-xl bg-slate-800/40 hover:border-blue-500 transition-all min-h-[180px] py-8">
+                {localPreview || uploadedImage ? (
+                  <Image
+                    src={localPreview || uploadedImage || "/placeholder.svg"}
+                    alt={t("uploadedImageAlt")}
+                    width={200}
+                    height={200}
+                    className="rounded-lg object-cover mx-auto shadow-lg max-h-40"
+                  />
+                ) : (
+                  <>
+                    <Plus className="w-10 h-10 text-slate-400 mb-2" />
+                    <div className="text-slate-300 text-lg font-medium">点击上传图像</div>
+                  </>
+                )}
+              </div>
+              <input
                 id="image-upload"
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
-                className="bg-slate-700/50 border-slate-600 text-white file:bg-blue-600 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 file:mr-4"
+                className="hidden"
               />
-            </div>
-            {uploadedImage && (
-              <div className="mt-4 p-4 bg-slate-700/30 rounded-lg">
-                <Image
-                  src={uploadedImage || "/placeholder.svg"}
-                  alt={t("uploadedImageAlt")}
-                  width={200}
-                  height={200}
-                  className="rounded-lg object-cover mx-auto shadow-lg"
-                />
-              </div>
-            )}
+            </label>
             {style?.isMulti && (
-              <>
-                <div className="mt-6 relative">
-                  <Input
-                    id="image-upload-2"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload2}
-                    className="bg-slate-700/50 border-slate-600 text-white file:bg-blue-600 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 file:mr-4"
-                  />
-                </div>
-                {uploadedImage2 && (
-                  <div className="mt-4 p-4 bg-slate-700/30 rounded-lg">
+              <label htmlFor="image-upload-2" className="flex-1 cursor-pointer">
+                <div className="flex flex-col items-center justify-center border-2 border-slate-600 rounded-xl bg-slate-800/40 hover:border-blue-500 transition-all min-h-[180px] py-8">
+                  {localPreview2 || uploadedImage2 ? (
                     <Image
-                      src={uploadedImage2 || "/placeholder.svg"}
+                      src={localPreview2 || uploadedImage2 || "/placeholder.svg"}
                       alt={t("uploadedImageAlt") + " 2"}
                       width={200}
                       height={200}
-                      className="rounded-lg object-cover mx-auto shadow-lg"
+                      className="rounded-lg object-cover mx-auto shadow-lg max-h-40"
                     />
-                  </div>
-                )}
-              </>
+                  ) : (
+                    <>
+                      <Plus className="w-10 h-10 text-slate-400 mb-2" />
+                      <div className="text-slate-300 text-lg font-medium">点击上传图像</div>
+                    </>
+                  )}
+                </div>
+                <input
+                  id="image-upload-2"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload2}
+                  className="hidden"
+                />
+              </label>
             )}
           </div>
+          <div className="text-slate-400 text-sm mt-2">您可以上传 JPG 和 PNG 格式的图片，大小不超过 10MB，且尺寸不小于 300px.</div>
           <div>
             <Label htmlFor="modify-prompt" className="text-slate-200 font-medium mb-2">
               {t("imageToImageModifyPromptLabel")}
