@@ -46,13 +46,13 @@ export default function ImageGenerationPage() {
                   key={style.id}
                   className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all text-left shadow-sm ${
                     selectedId === style.id
-                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white scale-105 shadow-lg'
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white scale-100 shadow-lg'
                       : 'hover:bg-slate-800 text-slate-200'
                   }`}
                   onClick={() => setSelectedId(style.id)}
                 >
                   <img src={style.previewImage} alt={t(`${style.id}.name`)} className="w-14 h-14 rounded-lg object-cover" />
-                  <span className="font-semibold text-lg truncate">{t(`${style.id}.name`)}</span>
+                  <span className="font-semibold break-words whitespace-normal line-clamp-3">{t(`${style.id}.name`)}</span>
                 </button>
               ))}
             </div>
