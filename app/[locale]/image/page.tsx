@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { getCurrentUserProfile } from "@/app/actions/auth/get-user-info";
 import { useEffect, useState } from "react";
+import { styles } from "@/config/styles";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");

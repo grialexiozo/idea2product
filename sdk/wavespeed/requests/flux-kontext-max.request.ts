@@ -7,6 +7,7 @@ const FluxKontextMaxSchema = z.object({
   seed: z.number().int().min(-1).max(9999999999).optional().describe('The same seed and the same prompt given to the same version of the model will output the same image every time.'),
   guidance_scale: z.number().min(1.0).max(10.0).optional().describe('The CFG (Classifier Free Guidance) scale is a measure of how close you want the model to stick to your prompt when looking for a related image to show you.'),
   enable_safety_checker: z.boolean().optional().describe('If set to true, the safety checker will be enabled.'),
+  safety_tolerance: z.string().optional().describe('The safety tolerance level for the generated image. 1 being the most strict and 5 being the most permissive.'),
 });
 
 export class FluxKontextMaxRequest extends BaseRequest<typeof FluxKontextMaxSchema> {
@@ -18,7 +19,8 @@ export class FluxKontextMaxRequest extends BaseRequest<typeof FluxKontextMaxSche
     image: string,
     seed?: number,
     guidance_scale: number = 3.5,
-    enable_safety_checker: boolean = true
+    enable_safety_checker: boolean = true,
+    safety_tolerance: string = "2"  
   ) {
     super();
     this.data = {
@@ -27,6 +29,7 @@ export class FluxKontextMaxRequest extends BaseRequest<typeof FluxKontextMaxSche
       seed,
       guidance_scale,
       enable_safety_checker,
+      safety_tolerance,
     };
     
   }

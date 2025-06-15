@@ -18,7 +18,7 @@ export function StyleCard({ id, name, description, prompt, previewImage }: Style
 
   const handleClick = () => {
     // Navigate to the image generation page with the style parameters
-    router.push(`/image?style=${encodeURIComponent(id)}&prompt=${encodeURIComponent(prompt)}`);
+    router.push(`/image?id=${encodeURIComponent(id)}`);
   };
 
   return (
@@ -39,7 +39,7 @@ export function StyleCard({ id, name, description, prompt, previewImage }: Style
       <CardFooter>
         <Button 
           onClick={handleClick}
-          className="w-full"
+          className="w-full cursor-pointer"
         >
           Generate Image
         </Button>
