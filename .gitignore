@@ -38,7 +38,6 @@ next-env.d.ts
 
 # Docker
 postgres_data/
-.env*.local
 
 
 .design
