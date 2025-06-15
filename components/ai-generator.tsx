@@ -382,6 +382,28 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
     }
   }, [style]);
 
+  // 在组件内添加分享方法
+  const handleShare = async () => {
+    const url = generatedImages[selectedImageIndex];
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'AI Generated Image',
+          url,
+        });
+      } catch (e) {
+        toast.error('分享失败');
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(url);
+        toast.success('链接已复制');
+      } catch (e) {
+        toast.error('复制失败');
+      }
+    }
+  };
+
   return (
     <div className="grid lg:grid-cols-3 gap-8" style={{ gridTemplateColumns: "1fr 2fr" }}>
       {/* Control Panel */}
@@ -514,11 +536,23 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                     <div className="flex space-x-3">
-                      <Button size="sm" variant="secondary" className="bg-white/90 text-slate-900 hover:bg-white">
-                        <Download className="w-4 h-4 mr-2" />
-                        {t("downloadButton")}
-                      </Button>
-                      <Button size="sm" variant="secondary" className="bg-white/90 text-slate-900 hover:bg-white">
+                      <a
+                        href={generatedImages[selectedImageIndex]}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button size="sm" variant="secondary" className="bg-white/90 text-slate-900 hover:bg-white">
+                          <Download className="w-4 h-4 mr-2" />
+                          {t("downloadButton")}
+                        </Button>
+                      </a>
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        className="bg-white/90 text-slate-900 hover:bg-white"
+                        onClick={handleShare}
+                      >
                         <Share2 className="w-4 h-4 mr-2" />
                         {t("shareButton")}
                       </Button>
