@@ -38,23 +38,25 @@ export default function ImageGenerationPage() {
       <div className="container mx-auto px-6 py-12">
         <div className="flex flex-row w-full bg-transparent rounded-3xl shadow-2xl">
           {/* 左侧风格选择栏 */}
-          <aside className="w-80 bg-slate-900/80 border-r border-slate-800 flex flex-col py-10 px-6 rounded-l-3xl shadow-xl overflow-y-auto">
-            <h2 className="text-2xl font-bold text-white mb-8">{t('sceneSelectTitle') || '选择场景'}</h2>
-            <div className="space-y-4 pr-2">
-              {styles.map((style) => (
-                <button
-                  key={style.id}
-                  className={`w-full flex flex-col items-center px-4 py-4 rounded-xl transition-all text-center shadow-sm ${
-                    selectedId === style.id
-                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white scale-100 shadow-lg'
-                      : 'hover:bg-slate-800 text-slate-200'
-                  }`}
-                  onClick={() => setSelectedId(style.id)}
-                >
-                  <img src={style.previewImage} alt={t(`${style.id}.name`)} className="w-full max-w-[160px] aspect-[16/9] rounded-lg object-cover mb-2" />
-                  <span className="font-semibold break-words whitespace-normal line-clamp-3 w-full">{t(`${style.id}.name`)}</span>
-                </button>
-              ))}
+          <aside className="w-80 bg-slate-900/80 border-r border-slate-800 flex flex-col rounded-l-3xl shadow-xl" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+            <div className="flex flex-col py-10 px-6 h-full">
+              <h2 className="text-2xl font-bold text-white mb-8">{t('sceneSelectTitle') || '选择场景'}</h2>
+              <div className="space-y-4 pr-2 overflow-y-auto" style={{ flex: 1 }}>
+                {styles.map((style) => (
+                  <button
+                    key={style.id}
+                    className={`w-full flex flex-col items-center px-4 py-4 rounded-xl transition-all text-center shadow-sm ${
+                      selectedId === style.id
+                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white scale-100 shadow-lg'
+                        : 'hover:bg-slate-800 text-slate-200'
+                    }`}
+                    onClick={() => setSelectedId(style.id)}
+                  >
+                    <img src={style.previewImage} alt={t(`${style.id}.name`)} className="w-full max-w-[160px] aspect-[16/9] rounded-lg object-cover mb-2" />
+                    <span className="font-semibold break-words whitespace-normal line-clamp-3 w-full">{t(`${style.id}.name`)}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </aside>
           {/* 右侧主内容区 */}
