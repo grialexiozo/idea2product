@@ -64,7 +64,7 @@ export default function ImageGenerationPage() {
             {/* 操作卡片 */}
             <div className="flex-1 bg-slate-800/80 rounded-tr-2xl rounded-br-2xl shadow-xl p-10 flex flex-col">
               <div className="flex items-center gap-6 mb-10">
-                <img src={selectedStyle.previewImage} alt={t(selectedStyle.id + '.name')} className="w-20 h-20 rounded-xl object-cover" />
+                <img src={selectedStyle.previewImage} alt={t(selectedStyle.id + '.name')} className="w-60 h-30 rounded-xl object-cover" />
                 <div>
                   <h1 className="text-3xl font-bold text-white mb-2">{t(selectedStyle.id + '.name')}</h1>
                   <p className="text-slate-300 text-lg">{t(selectedStyle.id + '.description')}</p>
