@@ -42,7 +42,7 @@ export default function HomePage() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 space-y-8">
             <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 <span className="text-white">{t("heroTitleMain")}</span>
                 <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent"> {t("heroTitleSub")}</span>
               </h1>

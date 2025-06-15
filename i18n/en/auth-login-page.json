@@ -27,5 +27,13 @@
   "termsOfService": "Terms of Service",
   "and": "and",
   "privacyPolicy": "Privacy Policy",
-  "goHome": "Go Home"
+  "goHome": "Go Home",
+  "or": "or",
+  "login": "Login",
+  "register": "Register",
+  "email": "Email",
+  "password": "Password",
+  "rememberMe": "Remember Me",
+  "loginWithGoogle": "Login with Google",
+  "loginWithFacebook": "Login with Facebook"
 }
