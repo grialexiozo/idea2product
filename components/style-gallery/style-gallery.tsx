@@ -35,6 +35,7 @@ export function StyleGallery() {
             let zIndex = 0;
             let opacity = 1;
             let boxShadow = "";
+            let width = "72%";
 
             if (pos === 0) {
               // 当前项更大更突出
@@ -42,24 +43,28 @@ export function StyleGallery() {
               zIndex = 40;
               opacity = 1;
               boxShadow = "0 8px 32px 0 rgba(80,80,200,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.18)";
+              width = "100%";
             } else if (pos === -1 || (pos === carouselItems.length - 1 && carouselIndex === 0)) {
               // 左侧更小更远
               transform = "translateX(-140%) scale(0.78) rotateY(30deg)";
               zIndex = 20;
               opacity = 0.6;
               boxShadow = "0 2px 8px 0 rgba(0,0,0,0.10)";
+              width = "72%";
             } else if (pos === 1 || (pos === -(carouselItems.length - 1) && carouselIndex === carouselItems.length - 1)) {
               // 右侧更小更远
               transform = "translateX(40%) scale(0.78) rotateY(-30deg)";
               zIndex = 20;
               opacity = 0.6;
               boxShadow = "0 2px 8px 0 rgba(0,0,0,0.10)";
+              width = "72%";
             } else {
               // 其余项隐藏
               transform = "translateX(-50%) scale(0.6) rotateY(0deg)";
               opacity = 0;
               zIndex = 0;
               boxShadow = "none";
+              width = "72%";
             }
 
             return (
@@ -69,7 +74,7 @@ export function StyleGallery() {
                 style={{
                   left: "50%",
                   top: 0,
-                  width: "72%",
+                  width,
                   height: "100%",
                   transform,
                   zIndex,

@@ -377,7 +377,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
   useEffect(() => {
     if (style) {
       setTextPrompt(style.prompt || "");
-      setGeneratedImages(style.previewImage ? [style.previewImage] : []);
+      setGeneratedImages(style.resultImage ? [style.resultImage] : []);
       setSelectedImageIndex(0);
     }
   }, [style]);
