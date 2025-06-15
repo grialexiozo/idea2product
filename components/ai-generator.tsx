@@ -17,6 +17,8 @@ import { toast } from "sonner";
 import { UserContext } from "@/lib/types/auth/user-context.bean";
 import { AuthStatus, ActiveStatus } from "@/lib/types/permission/permission-config.dto";
 import { TaskStatus, TaskStatusType, TaskResultStatus, TaskResultType } from "@/lib/types/task/enum.bean";
+import { wsFluxKontextMax } from "@/app/actions/tool/ws-flux-kontext-max";
+import { wsFluxKontextMaxMulti } from "@/app/actions/tool/ws-flux-kontext-max-multi";
 
 import { styles } from "@/config/styles";
 
@@ -149,33 +151,39 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
       setGeneratedImages([]);
       setGenerationProgress(0);
 
-      // Build request parameters
-      const params: FluxDevUltraFastParams = {
-        prompt: textPrompt,
-        size: imageSize,
-        num_images: numImages,
-        num_inference_steps: inferenceSteps,
-        guidance_scale: guidanceScale,
-        seed: seed,
-      };
-
-      // If in image-to-image mode, add image parameters
-      if (uploadedImage) {
-        params.image = uploadedImage;
-        params.strength = strength;
-      }
-
-      // Call Server Action
-      const taskInfo = await wsFluxDevUltraFast(params);
-
-      if (taskInfo.id) {
-        setTaskId(taskInfo.id);
-        // Start polling task status
-        startPolling(taskInfo.id);
+      // 构造参数
+      if (style?.isMulti) {
+        // 多图
+        const params = {
+          prompt: textPrompt,
+          images: [uploadedImage, uploadedImage2].filter((img): img is string => Boolean(img)),
+          // 其他参数可按需补充
+        };
+        const taskInfo = await wsFluxKontextMaxMulti(params);
+        if (taskInfo.id) {
+          setTaskId(taskInfo.id);
+          startPolling(taskInfo.id);
+        } else {
+          setIsGenerating(false);
+          setErrorMessage(taskInfo.message || "Failed to submit image generation request");
+          toast.error(taskInfo.message || "Failed to start image generation");
+        }
       } else {
-        setIsGenerating(false);
-        setErrorMessage(taskInfo.message || "Failed to submit image generation request");
-        toast.error(taskInfo.message || "Failed to start image generation");
+        // 单图
+        const params = {
+          prompt: textPrompt,
+          image: uploadedImage || undefined,
+          // 其他参数可按需补充
+        };
+        const taskInfo = await wsFluxKontextMax(params);
+        if (taskInfo.id) {
+          setTaskId(taskInfo.id);
+          startPolling(taskInfo.id);
+        } else {
+          setIsGenerating(false);
+          setErrorMessage(taskInfo.message || "Failed to submit image generation request");
+          toast.error(taskInfo.message || "Failed to start image generation");
+        }
       }
     } catch (error) {
       console.log("Error in generation:", error);
