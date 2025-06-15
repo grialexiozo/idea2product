@@ -372,7 +372,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
   }, [style]);
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid lg:grid-cols-3 gap-8" style={{ gridTemplateColumns: "1fr 2fr" }}>
       {/* Control Panel */}
       <Card className="bg-slate-800/50 backdrop-blur-xl border-slate-700/50 shadow-2xl">
         <CardHeader className="pb-6">
@@ -385,7 +385,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
         </CardHeader>
         <CardContent className="space-y-6">
           <div>
-            <Label htmlFor="image-upload" className="text-slate-200 font-medium">
+            <Label htmlFor="image-upload" className="text-slate-200 font-medium mb-2">
               {t("imageToImageUploadLabel")}
             </Label>
             <div className="relative">
@@ -434,7 +434,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
             )}
           </div>
           <div>
-            <Label htmlFor="modify-prompt" className="text-slate-200 font-medium">
+            <Label htmlFor="modify-prompt" className="text-slate-200 font-medium mb-2">
               {t("imageToImageModifyPromptLabel")}
             </Label>
             <Textarea
