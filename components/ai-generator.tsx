@@ -19,7 +19,7 @@ import { UserContext } from "@/lib/types/auth/user-context.bean";
 import { AuthStatus, ActiveStatus } from "@/lib/types/permission/permission-config.dto";
 import { TaskStatus, TaskStatusType, TaskResultStatus, TaskResultType } from "@/lib/types/task/enum.bean";
 
-export default function AIGenerator() {
+export default function AIGenerator({ selectedStyle }: { selectedStyle?: any }) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -268,7 +268,7 @@ export default function AIGenerator() {
   };
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+    <div className="grid lg:grid-cols-2 gap-8">
       {/* Control Panel */}
       <Card className="bg-slate-800/50 backdrop-blur-xl border-slate-700/50 shadow-2xl">
         <CardHeader className="pb-6">
