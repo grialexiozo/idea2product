@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Loader2, Download, Share2, Wand2, Upload, Sparkles, AlertCircle } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -296,196 +295,43 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <Tabs defaultValue="text-to-image" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-slate-700/50 p-1">
-              <TabsTrigger value="text-to-image" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all duration-200">
-                <Sparkles className="w-4 h-4 mr-2" />
-                {t("textToImageTab")}
-              </TabsTrigger>
-              <TabsTrigger value="image-to-image" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all duration-200">
-                <Upload className="w-4 h-4 mr-2" />
-                {t("imageToImageTab")}
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="text-to-image" className="space-y-6 mt-6">
-              <div className="space-y-3">
-                <Label htmlFor="prompt" className="text-slate-200 font-medium">
-                  {t("textToImagePromptLabel")}
-                </Label>
-                <Textarea
-                  id="prompt"
-                  placeholder={t("textToImagePlaceholder")}
-                  value={textPrompt}
-                  onChange={(e) => setTextPrompt(e.target.value)}
-                  className="min-h-[120px] bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500/20 resize-none"
+          <div>
+            <Label htmlFor="image-upload" className="text-slate-200 font-medium">
+              {t("imageToImageUploadLabel")}
+            </Label>
+            <div className="relative">
+              <Input
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="bg-slate-700/50 border-slate-600 text-white file:bg-blue-600 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 file:mr-4"
+              />
+            </div>
+            {uploadedImage && (
+              <div className="mt-4 p-4 bg-slate-700/30 rounded-lg">
+                <Image
+                  src={uploadedImage || "/placeholder.svg"}
+                  alt={t("uploadedImageAlt")}
+                  width={200}
+                  height={200}
+                  className="rounded-lg object-cover mx-auto shadow-lg"
                 />
               </div>
-
-              {/* Basic Settings */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="image-size" className="text-slate-200 font-medium">
-                    Image Size
-                  </Label>
-                  <Select value={imageSize} onValueChange={setImageSize}>
-                    <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
-                      <SelectValue placeholder="Select size" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-slate-800 border-slate-700 text-white">
-                      <SelectItem value="512*512">512 x 512</SelectItem>
-                      <SelectItem value="768*768">768 x 768</SelectItem>
-                      <SelectItem value="1024*1024">1024 x 1024</SelectItem>
-                      <SelectItem value="768*1024">768 x 1024</SelectItem>
-                      <SelectItem value="1024*768">1024 x 768</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="num-images" className="text-slate-200 font-medium">
-                    Number of Images
-                  </Label>
-                  <Select value={numImages.toString()} onValueChange={(value) => setNumImages(parseInt(value))}>
-                    <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
-                      <SelectValue placeholder="Number of images" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-slate-800 border-slate-700 text-white">
-                      <SelectItem value="1">1 image</SelectItem>
-                      <SelectItem value="2">2 images</SelectItem>
-                      <SelectItem value="4">4 images</SelectItem>
-                      <SelectItem value="6">6 images</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Advanced Settings (Collapsible) */}
-              <div>
-                <button
-                  type="button"
-                  onClick={() => setAdvancedSettingsOpen(!advancedSettingsOpen)}
-                  className="text-blue-400 text-sm flex items-center hover:text-blue-300 transition-colors">
-                  {advancedSettingsOpen ? "Hide Advanced Settings" : "Show Advanced Settings"}
-                  <span className="ml-1">{advancedSettingsOpen ? "▲" : "▼"}</span>
-                </button>
-
-                {advancedSettingsOpen && (
-                  <div className="mt-4 p-4 bg-slate-700/30 rounded-lg space-y-4">
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <Label htmlFor="inference-steps" className="text-slate-200 font-medium">
-                          Inference Steps ({inferenceSteps})
-                        </Label>
-                        <span className="text-slate-400 text-xs">Higher = More detailed but slower</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-slate-400 text-xs">20</span>
-                        <Input
-                          id="inference-steps"
-                          type="range"
-                          min={20}
-                          max={50}
-                          step={1}
-                          value={inferenceSteps}
-                          onChange={(e) => setInferenceSteps(parseInt(e.target.value))}
-                          className="bg-slate-700/50 border-slate-600"
-                        />
-                        <span className="text-slate-400 text-xs">50</span>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <Label htmlFor="guidance-scale" className="text-slate-200 font-medium">
-                          Guidance Scale ({guidanceScale.toFixed(1)})
-                        </Label>
-                        <span className="text-slate-400 text-xs">Higher = Closer to prompt</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-slate-400 text-xs">1.0</span>
-                        <Input
-                          id="guidance-scale"
-                          type="range"
-                          min={1.0}
-                          max={7.0}
-                          step={0.1}
-                          value={guidanceScale}
-                          onChange={(e) => setGuidanceScale(parseFloat(e.target.value))}
-                          className="bg-slate-700/50 border-slate-600"
-                        />
-                        <span className="text-slate-400 text-xs">7.0</span>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <Label htmlFor="seed" className="text-slate-200 font-medium">
-                          Random Seed {seed === -1 ? "(Random)" : `(${seed})`}
-                        </Label>
-                        <span className="text-slate-400 text-xs">Fixed seed for reproducible results</span>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Input
-                          id="seed"
-                          type="number"
-                          min={-1}
-                          max={2147483647}
-                          value={seed}
-                          onChange={(e) => setSeed(parseInt(e.target.value))}
-                          className="bg-slate-700/50 border-slate-600 text-white"
-                        />
-                        <Button variant="outline" size="sm" onClick={() => setSeed(-1)} className="border-slate-600 text-slate-300 hover:bg-slate-700">
-                          Random
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="image-to-image" className="space-y-6 mt-6">
-              <div className="space-y-3">
-                <Label htmlFor="image-upload" className="text-slate-200 font-medium">
-                  {t("imageToImageUploadLabel")}
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="image-upload"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="bg-slate-700/50 border-slate-600 text-white file:bg-blue-600 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 file:mr-4"
-                  />
-                </div>
-                {uploadedImage && (
-                  <div className="mt-4 p-4 bg-slate-700/30 rounded-lg">
-                    <Image
-                      src={uploadedImage || "/placeholder.svg"}
-                      alt={t("uploadedImageAlt")}
-                      width={200}
-                      height={200}
-                      className="rounded-lg object-cover mx-auto shadow-lg"
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="space-y-3">
-                <Label htmlFor="modify-prompt" className="text-slate-200 font-medium">
-                  {t("imageToImageModifyPromptLabel")}
-                </Label>
-                <Textarea
-                  id="modify-prompt"
-                  placeholder={t("imageToImageModifyPromptPlaceholder")}
-                  value={textPrompt}
-                  onChange={(e) => setTextPrompt(e.target.value)}
-                  className="min-h-[100px] bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500/20 resize-none"
-                />
-              </div>
-            </TabsContent>
-          </Tabs>
-
+            )}
+          </div>
+          <div>
+            <Label htmlFor="modify-prompt" className="text-slate-200 font-medium">
+              {t("imageToImageModifyPromptLabel")}
+            </Label>
+            <Textarea
+              id="modify-prompt"
+              placeholder={t("imageToImageModifyPromptPlaceholder")}
+              value={textPrompt}
+              onChange={(e) => setTextPrompt(e.target.value)}
+              className="min-h-[100px] bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500/20 resize-none"
+            />
+          </div>
           <Button
             onClick={handleGenerate}
             disabled={isGenerating || !textPrompt.trim()}
@@ -504,7 +350,6 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
           </Button>
         </CardContent>
       </Card>
-
       {/* Result Display */}
       <Card className="bg-slate-800/50 backdrop-blur-xl border-slate-700/50 shadow-2xl">
         <CardHeader className="pb-6">
@@ -549,7 +394,6 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
                     </div>
                   </div>
                 </div>
-
                 {/* Image grid - shown when there are multiple images */}
                 {generatedImages.length > 1 && (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -559,8 +403,15 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
                         className={`relative cursor-pointer rounded-md overflow-hidden border-2 transition-all ${
                           index === selectedImageIndex ? "border-blue-500 ring-2 ring-blue-500/50" : "border-transparent hover:border-slate-500"
                         }`}
-                        onClick={() => setSelectedImageIndex(index)}>
-                        <Image src={image} alt={`Generated image ${index + 1}`} width={128} height={128} className="w-full h-full object-cover aspect-square" />
+                        onClick={() => setSelectedImageIndex(index)}
+                      >
+                        <Image
+                          src={image || "/placeholder.svg"}
+                          alt={t("generatedImageAlt")}
+                          width={256}
+                          height={256}
+                          className="w-full h-full object-cover rounded-md"
+                        />
                       </div>
                     ))}
                   </div>
