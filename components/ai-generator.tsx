@@ -26,6 +26,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [textPrompt, setTextPrompt] = useState("");
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImage2, setUploadedImage2] = useState<string | null>(null);
   const [taskId, setTaskId] = useState<string | null>(null);
   const [taskInfo, setTaskInfo] = useState<TaskInfo | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -268,6 +269,94 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
     }
   };
 
+  const handleImageUpload2 = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Preview image
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setUploadedImage2(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    // Check file size (5MB limit)
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    if (file.size > maxSize) {
+      toast.error(t("fileSizeExceedsLimit") || "File size exceeds limit (5MB)");
+      return;
+    }
+
+    try {
+      // Resize image
+      const resizedFile = await new Promise<File>((resolve) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.onload = () => {
+          URL.revokeObjectURL(img.src); // Clean up object URL
+          const canvas = document.createElement("canvas");
+          const MAX_DIMENSION = 1024;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_DIMENSION) {
+              height *= MAX_DIMENSION / width;
+              width = MAX_DIMENSION;
+            }
+          } else {
+            if (height > MAX_DIMENSION) {
+              width *= MAX_DIMENSION / height;
+              height = MAX_DIMENSION;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((blob) => {
+            if (blob) {
+              resolve(new File([blob], file.name, { type: file.type }));
+            } else {
+              resolve(file); // Use original file if blob creation fails
+            }
+          }, file.type);
+        };
+      });
+
+      // Prepare for upload
+      const formData = new FormData();
+      formData.append("file", resizedFile);
+
+      // Show uploading notification
+      toast.loading(t("uploadingImage") || "Uploading image...", {
+        id: "image-upload-2",
+      });
+
+      // Call upload API
+      const result = await uploadFile(formData);
+
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      if (result.data?.publicUrl) {
+        // Update uploaded image URL
+        setUploadedImage2(result.data.publicUrl);
+        toast.success(t("uploadSuccessDescription") || "Image uploaded successfully", {
+          id: "image-upload-2",
+        });
+      }
+    } catch (err: any) {
+      console.error("Image upload failed:", err);
+      toast.error(err.message || t("uploadErrorDescription") || "Image upload failed, please try again", {
+        id: "image-upload-2",
+      });
+    }
+  };
+
   // 兼容：优先用selectedStyleId查找style，否则用selectedStyle
   const style = selectedStyleId
     ? styles.find((s) => s.id === selectedStyleId)
@@ -318,6 +407,30 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
                   className="rounded-lg object-cover mx-auto shadow-lg"
                 />
               </div>
+            )}
+            {style?.isMulti && (
+              <>
+                <div className="mt-6 relative">
+                  <Input
+                    id="image-upload-2"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload2}
+                    className="bg-slate-700/50 border-slate-600 text-white file:bg-blue-600 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 file:mr-4"
+                  />
+                </div>
+                {uploadedImage2 && (
+                  <div className="mt-4 p-4 bg-slate-700/30 rounded-lg">
+                    <Image
+                      src={uploadedImage2 || "/placeholder.svg"}
+                      alt={t("uploadedImageAlt") + " 2"}
+                      width={200}
+                      height={200}
+                      className="rounded-lg object-cover mx-auto shadow-lg"
+                    />
+                  </div>
+                )}
+              </>
             )}
           </div>
           <div>
