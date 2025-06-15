@@ -55,7 +55,7 @@ export default function HomePage() {
               <Button
                 onClick={startButtonHandler}
                 size="lg"
-                className="h-14 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium shadow-xl hover:shadow-blue-500/25 transition-all duration-300">
+                className="h-14 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium shadow-xl hover:shadow-blue-500/25 transition-all duration-300 cursor-pointer">
                 <Zap className="mr-2 h-5 w-5" />
                 {t("startButton")}
                 <ArrowRight className="ml-2 h-5 w-5" />

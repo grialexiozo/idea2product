@@ -114,8 +114,8 @@ export default function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Link href="/login">
-              <Button variant="ghost" className="text-white hover:text-white">
+            <Link href="/login" className="hover:bg-transparent">
+              <Button variant="ghost" className="text-white hover:text-blue-400 hover:bg-white/10">
                 {t('login')}
               </Button>
             </Link>
