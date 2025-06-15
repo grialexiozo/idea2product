@@ -13,8 +13,8 @@ const UN_USER_CONTEXT = {
 };
 
 const ROUTE_PERMISSIONS = {
-  public: ["/", "/login", "/not-found", "/unauthorized", "privacy", "terms", "auto-login", "confirm", "forgot-password", "login", "register", "subscribe-plan"],
-  admin: ["/admin", "/admin/*"],
+  public: ["/", "/login", "/not-found", "/unauthorized", "/privacy", "/terms", "/auto-login", "/confirm", "/forgot-password", "/register", "/subscribe-plan"],
+  admin: [],
 };
 
 /**
