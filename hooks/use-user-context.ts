@@ -1,6 +1,7 @@
 import { UserContext } from "@/lib/types/auth/user-context.bean";
 import { useEffect, useState } from "react";
 import { getCurrentUserProfile } from "@/app/actions/auth/get-user-info";
+import { AuthStatus, ActiveStatus } from "@/lib/types/permission/permission-config.dto";
 
 export function useUserContext() {
   const [userContext, setUserContext] = useState<UserContext | null>(null);
@@ -15,9 +16,9 @@ export function useUserContext() {
           setUserContext({
             id: userInfo.id,
             email: userInfo.email,
-            name: userInfo.name,
-            role: userInfo.role,
-            subscription: userInfo.subscription
+            roles: userInfo.roles || [],
+            authStatus: AuthStatus.ANONYMOUS,
+            activeStatus: ActiveStatus.INACTIVE,
           });
         }
       } catch (err) {
