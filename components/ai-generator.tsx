@@ -387,7 +387,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="flex gap-6">
+          <div className={`${style?.isMulti ? 'flex flex-col gap-4' : 'flex gap-6'}`}>
             {/* 单图或多图上传卡片 */}
             <label htmlFor="image-upload" className="flex-1 cursor-pointer">
               <div className="flex flex-col items-center justify-center border-2 border-slate-600 rounded-xl bg-slate-800/40 hover:border-blue-500 transition-all min-h-[180px] py-8">
