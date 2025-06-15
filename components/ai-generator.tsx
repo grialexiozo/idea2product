@@ -19,7 +19,9 @@ import { UserContext } from "@/lib/types/auth/user-context.bean";
 import { AuthStatus, ActiveStatus } from "@/lib/types/permission/permission-config.dto";
 import { TaskStatus, TaskStatusType, TaskResultStatus, TaskResultType } from "@/lib/types/task/enum.bean";
 
-export default function AIGenerator({ selectedStyle }: { selectedStyle?: any }) {
+import { styles } from "@/config/styles";
+
+export default function AIGenerator({ selectedStyle, selectedStyleId }: { selectedStyle?: any, selectedStyleId?: string }) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -266,6 +268,20 @@ export default function AIGenerator({ selectedStyle }: { selectedStyle?: any }) 
       });
     }
   };
+
+  // 兼容：优先用selectedStyleId查找style，否则用selectedStyle
+  const style = selectedStyleId
+    ? styles.find((s) => s.id === selectedStyleId)
+    : selectedStyle;
+
+  // 新增：当style变化时，设置默认图片和提示词
+  useEffect(() => {
+    if (style) {
+      setTextPrompt(style.prompt || "");
+      setGeneratedImages(style.previewImage ? [style.previewImage] : []);
+      setSelectedImageIndex(0);
+    }
+  }, [style]);
 
   return (
     <div className="grid lg:grid-cols-2 gap-8">

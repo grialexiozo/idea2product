@@ -62,7 +62,7 @@ export default function ImageGenerationPage() {
                   <p className="text-slate-300 text-lg">{t(selectedStyle.id + '.description')}</p>
                 </div>
               </div>
-              <AIGenerator selectedStyle={selectedStyle} />
+              <AIGenerator selectedStyleId={selectedId} />
             </div>
 
           </main>
