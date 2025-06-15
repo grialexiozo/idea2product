@@ -20,5 +20,7 @@
   "creationHint": "请填写提示词并选择风格后点击生成。",
   "generatedImageAlt": "生成的图片",
   "downloadButton": "下载图片",
-  "shareButton": "分享图片"
+  "shareButton": "分享图片",
+  "uploadTip": "点击上传图像",
+  "uploadDesc": "您可以上传 JPG 和 PNG 格式的图片，大小不超过 10MB，且尺寸不小于 300px."
 } 

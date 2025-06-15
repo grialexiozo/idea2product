@@ -402,7 +402,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
                 ) : (
                   <>
                     <Plus className="w-10 h-10 text-slate-400 mb-2" />
-                    <div className="text-slate-300 text-lg font-medium">点击上传图像</div>
+                    <div className="text-slate-300 text-lg font-medium">{t('uploadTip')}</div>
                   </>
                 )}
               </div>
@@ -428,7 +428,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
                   ) : (
                     <>
                       <Plus className="w-10 h-10 text-slate-400 mb-2" />
-                      <div className="text-slate-300 text-lg font-medium">点击上传图像</div>
+                      <div className="text-slate-300 text-lg font-medium">{t('uploadTip')}</div>
                     </>
                   )}
                 </div>
@@ -442,7 +442,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
               </label>
             )}
           </div>
-          <div className="text-slate-400 text-sm mt-2">您可以上传 JPG 和 PNG 格式的图片，大小不超过 10MB，且尺寸不小于 300px.</div>
+          <div className="text-slate-400 text-sm mt-2">{t('uploadDesc')}</div>
           <div>
             <Label htmlFor="modify-prompt" className="text-slate-200 font-medium mb-2">
               {t("imageToImageModifyPromptLabel")}

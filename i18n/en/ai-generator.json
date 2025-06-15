@@ -21,5 +21,7 @@
   "fileSizeExceedsLimit": "File size exceeds limit (5MB)",
   "uploadingImage": "Uploading image...",
   "uploadSuccessDescription": "Image uploaded successfully",
-  "uploadErrorDescription": "Failed to upload image, please try again"
+  "uploadErrorDescription": "Failed to upload image, please try again",
+  "uploadTip": "Click to upload image",
+  "uploadDesc": "You can upload JPG and PNG images, up to 10MB, and at least 300px in size."
 }
