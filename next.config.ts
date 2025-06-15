@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
   experimental: {
     ppr: true,
     clientSegmentCache: true,
-    forceSwcTransforms: true,
+    forceSwcTransforms: false,
   },
   onDemandEntries: {
     // Page cache duration in memory (milliseconds)
