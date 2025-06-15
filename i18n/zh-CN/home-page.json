@@ -1,8 +1,7 @@
 {
-  "heroTitlePart1": "20大AI场景",
-  "heroTitlePart2": "一键生成创意图片",
-  "heroDescriptionLine1": "覆盖设计、办公、营销、娱乐等多元场景，满足你的全部AI图片需求。",
-  "heroDescriptionLine2": "点击下方按钮，立即体验AI创作的乐趣。",
+  "heroTitleMain": "20大AI场景",
+  "heroTitleSub": "一键生成创意图片",
+  "heroDescription": "覆盖设计、办公、营销、娱乐等多元场景，满足你的全部AI图片需求。",
   "startButton": "立即体验20大场景",
   "viewPlansButton": "查看全部场景",
   "featuresTitle": "为什么选择我们？",

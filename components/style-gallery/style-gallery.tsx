@@ -97,7 +97,9 @@ const styles = [
 export function StyleGallery() {
   const t = useTranslations("Styles");
   const [carouselIndex, setCarouselIndex] = useState(0);
-  const carouselItems = styles.slice(0, 5);
+  const carouselItems = styles.slice(0, 4);
+
+  const gridItems = styles.slice(4, 12);
 
   // 简单自动轮播效果
   useEffect(() => {
@@ -165,12 +167,12 @@ export function StyleGallery() {
               >
                 <img
                   src={item.previewImage}
-                  alt={t(item.nameKey)}
+                  alt={t(`${item.id}.name`)}
                   className="object-cover w-full h-full rounded-xl"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                  <div className="text-xl font-bold text-white">{t(item.nameKey)}</div>
-                  <div className="text-slate-200 text-sm mt-1">{t(item.descriptionKey)}</div>
+                  <div className="text-xl font-bold text-white">{t(`${item.id}.name`)}</div>
+                  <div className="text-slate-200 text-sm mt-1">{t(`${item.id}.description`)}</div>
                 </div>
               </div>
             );
@@ -179,7 +181,7 @@ export function StyleGallery() {
       </div>
       {/* Gallery Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mt-20">
-        {styles.map((style) => (
+        {gridItems.map((style) => (
           <StyleCard
             key={style.id}
             id={style.id}

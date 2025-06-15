@@ -40,11 +40,11 @@ export default function Navbar() {
           <Link href="/" className="text-slate-300 hover:text-white transition-colors duration-200 font-medium">
             {t('home')}
           </Link>
-          <Link href="/task/history" className="text-slate-300 hover:text-white transition-colors duration-200 font-medium">
+          {/* <Link href="/task/history" className="text-slate-300 hover:text-white transition-colors duration-200 font-medium">
             {t('history')}
-          </Link>
+          </Link> */}
           <Link href="/task/result" className="text-slate-300 hover:text-white transition-colors duration-200 font-medium">
-            {t('resultList')}
+            {t('history')}
           </Link>
           <Link
             href="/subscribe-plan"
