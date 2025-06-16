@@ -38,7 +38,7 @@ export default function ImageGenerationPage() {
       <div className="container mx-auto px-6 py-16">
         <div className="flex flex-row w-full bg-transparent rounded-3xl shadow-2xl">
           {/* 左侧风格选择栏 */}
-          <aside className="w-80 bg-slate-900/80 border-r border-slate-800 flex flex-col rounded-l-3xl shadow-xl" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+          <aside className="w-80 bg-slate-900/80 border-r border-slate-800 flex flex-col rounded-l-3xl shadow-xl" style={{ maxHeight: 'calc(100vh + 164px)' }}>
             <div className="flex flex-col py-10 px-6 h-full">
               <h2 className="text-2xl font-bold text-white mb-8">{t('sceneSelectTitle') || '选择场景'}</h2>
               <div className="space-y-4 pr-2 overflow-y-auto" style={{ flex: 1 }}>

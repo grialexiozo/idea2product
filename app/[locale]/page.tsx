@@ -38,15 +38,15 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16">
+      <section className="pt-24">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
                 <span className="text-white">{t("heroTitleMain")}</span>
                 <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent"> {t("heroTitleSub")}</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
                 {t("heroDescription")}
               </p>
             </div>
