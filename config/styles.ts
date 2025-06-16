@@ -76,10 +76,6 @@ export const styles = [
     "isMulti": false
   },
 
-
-
-
-
   {
     "id": "addModelToClothing",
     "nameKey": "styles.addModelToClothing.name",
@@ -96,7 +92,7 @@ export const styles = [
     "prompt": "The change involved a woman holding a blue bag for a live stream display, maintaining the consistency of the character unchanged",
     "previewImage": "/styles/image5.png",
     "resultImage": "/styles/p5.png",
-    "isMulti": false
+    "isMulti": true
   },
   {
     "id": "styleTransfer",
