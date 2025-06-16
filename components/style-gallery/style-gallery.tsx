@@ -10,9 +10,9 @@ export function StyleGallery() {
   const router = useRouter();
   const t = useTranslations("Styles");
   const [carouselIndex, setCarouselIndex] = useState(0);
-  const carouselItems = styles.slice(0, 3);
+  const carouselItems = styles.slice(0, 4);
 
-  const gridItems = styles.slice(3, 12);
+  const gridItems = styles.slice(4, 12);
 
   // 简单自动轮播效果
   useEffect(() => {

@@ -2,6 +2,15 @@ import { tr } from "@faker-js/faker";
 
 export const styles = [
   {
+    "id": "photoToLabubu",
+    "nameKey": "styles.photoToLabubu.name",
+    "descriptionKey": "styles.photoRestoration.description",
+    "prompt": "Transform the uploaded portrait into a Labubu-style designer art toy. Keep the facial features loosely recognizable, but apply the signature Labubu aesthetic: oversized expressive eyes, visible sharp teeth in a mischievous smile, rounded plush-like body, and a fluffy bunny costume with long ears. The result should look like a collectible toy character from THE MONSTERS series by Kasing Lung, in a snowy or dreamy environment.",
+    "previewImage": "/styles/image13.png",
+    "resultImage": "/styles/p13.png",
+    "isMulti": false
+  },
+  {
     "id": "photoRestoration",
     "nameKey": "styles.photoRestoration.name",
     "descriptionKey": "styles.photoRestoration.description",

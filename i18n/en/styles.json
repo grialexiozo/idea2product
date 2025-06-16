@@ -1,5 +1,9 @@
 {
   "sceneSelectTitle": "Select Scene",
+  "photoToLabubu": {
+    "name": "Photo to Labubu",
+    "description": "Want to see yourself or a friend transformed into Labubu? Just upload a photo and generate it with one click!"
+  },
   "photoRestoration": {
     "name": "Photo Restoration",
     "description": "Restore damaged, blurry, or faded old photos to high-definition color images with one click."
