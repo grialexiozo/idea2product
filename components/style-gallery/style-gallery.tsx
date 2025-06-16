@@ -30,7 +30,7 @@ export function StyleGallery() {
           {carouselItems.map((item, idx) => {
             // 计算相对当前索引的位置
             const pos = idx - carouselIndex;
-            let style = "absolute transition-all duration-700";
+            let style = "absolute transition-all duration-700 cursor-pointer";
             let transform = "";
             let zIndex = 0;
             let opacity = 1;
