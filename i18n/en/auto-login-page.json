@@ -7,5 +7,6 @@
   "goHome": "Go to Homepage",
   "anErrorOccurred": "An error occurred. Please try again.",
   "welcomeBack": "Welcome back!",
-  "signInToAccount": "Sign in to your account"
+  "signInToAccount": "Sign in to your account",
+  "errorPrefix": "Error: "
 }

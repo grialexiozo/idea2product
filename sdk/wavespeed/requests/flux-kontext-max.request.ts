@@ -1,37 +1,40 @@
-import { z } from 'zod';
-import { BaseRequest } from '../base';
+import { z } from "zod";
+import { BaseRequest } from "../base";
 
 const FluxKontextMaxSchema = z.object({
-  prompt: z.string().min(1, { message: 'Prompt is required.' }).describe('The prompt to generate an image from.'),
-  image: z.string().min(1, { message: 'Image is required.' }).describe('The image to generate an image from.'),
-  seed: z.number().int().min(-1).max(9999999999).optional().describe('The same seed and the same prompt given to the same version of the model will output the same image every time.'),
-  guidance_scale: z.number().min(1.0).max(10.0).optional().describe('The CFG (Classifier Free Guidance) scale is a measure of how close you want the model to stick to your prompt when looking for a related image to show you.'),
-  enable_safety_checker: z.boolean().optional().describe('If set to true, the safety checker will be enabled.'),
-  safety_tolerance: z.string().optional().describe('The safety tolerance level for the generated image. 1 being the most strict and 5 being the most permissive.'),
+  prompt: z.string().min(1, { message: "Prompt is required." }).describe("The prompt to generate an image from."),
+  image: z.string().min(1, { message: "Image is required." }).describe("The image to generate an image from."),
+  seed: z
+    .number()
+    .int()
+    .min(-1)
+    .max(9999999999)
+    .optional()
+    .describe("The same seed and the same prompt given to the same version of the model will output the same image every time."),
+  guidance_scale: z
+    .number()
+    .min(1.0)
+    .max(10.0)
+    .optional()
+    .describe(
+      "The CFG (Classifier Free Guidance) scale is a measure of how close you want the model to stick to your prompt when looking for a related image to show you."
+    ),
+  enable_safety_checker: z.boolean().optional().describe("If set to true, the safety checker will be enabled."),
 });
 
 export class FluxKontextMaxRequest extends BaseRequest<typeof FluxKontextMaxSchema> {
   protected schema = FluxKontextMaxSchema;
-  protected data: z.infer<typeof FluxKontextMaxSchema>;
 
-  constructor(
-    prompt: string,
-    image: string,
-    seed?: number,
-    guidance_scale: number = 3.5,
-    enable_safety_checker: boolean = true,
-    safety_tolerance: string = "2"  
-  ) {
-    super();
-    this.data = {
+  static create(prompt: string, image: string, seed?: number, guidance_scale: number = 3.5, enable_safety_checker: boolean = true) {
+    const request = new FluxKontextMaxRequest();
+    request.data = {
       prompt,
       image,
       seed,
       guidance_scale,
       enable_safety_checker,
-      safety_tolerance,
     };
-    
+    return request;
   }
 
   getModelUuid(): string {
@@ -40,5 +43,15 @@ export class FluxKontextMaxRequest extends BaseRequest<typeof FluxKontextMaxSche
 
   getModelType(): string {
     return "image-to-image";
+  }
+
+  getDefaultParams(): Record<string, any> {
+    return {
+      num_images: 1,
+    };
+  }
+
+  getFeatureCalculator(): string {
+    return "1";
   }
 }

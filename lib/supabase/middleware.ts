@@ -14,7 +14,7 @@ const UN_USER_CONTEXT = {
 
 const ROUTE_PERMISSIONS = {
   public: ["/", "/login", "/not-found", "/unauthorized", "/privacy", "/terms", "/auto-login", "/confirm", "/forgot-password", "/register", "/subscribe-plan"],
-  admin: [],
+  admin: ["/admin", "/admin/*"],
 };
 
 /**
@@ -79,7 +79,7 @@ export async function getSessionUser(supabase: SupabaseClient): Promise<UserCont
     }
     return userContext;
   } catch (error: any) {
-    console.error("Unexpected error in getCachedUser:", error.message || error);
+    console.error("Unexpected error in getSessionUser:", error.message || error);
     return UN_USER_CONTEXT;
   }
 }
@@ -107,7 +107,6 @@ export function isBasicRoute(path: string, routes: string[]) {
  */
 export async function updateSessionAndAuth(request: NextRequest) {
   const { supabase, response } = await createSupabaseMiddlewareClient(request);
-  const userContext = await getSessionUser(supabase);
   const path = request.nextUrl.pathname;
   const method = request.method;
 
@@ -115,6 +114,7 @@ export async function updateSessionAndAuth(request: NextRequest) {
     if (isBasicRoute(path, ROUTE_PERMISSIONS.public)) {
       return response;
     }
+    const userContext = await getSessionUser(supabase);
 
     if (isBasicRoute(path, ROUTE_PERMISSIONS.admin)) {
       if (userContext.roles.includes("system_admin")) {

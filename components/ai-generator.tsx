@@ -11,14 +11,18 @@ import { Loader2, Download, Share2, Wand2, Upload, Sparkles, AlertCircle, Plus }
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { FluxDevUltraFastParams, wsFluxDevUltraFast, wsFluxDevUltraFastStatus, TaskInfo } from "@/app/actions/tool/ws-flux-dev-ultra-fast";
+import { toolCall } from "@/app/actions/tool/tool-call";
+import { toolStatus } from "@/app/actions/tool/tool-status";
 import { uploadFile } from "@/app/actions/common/upload";
 import { toast } from "sonner";
 import { UserContext } from "@/lib/types/auth/user-context.bean";
 import { AuthStatus, ActiveStatus } from "@/lib/types/permission/permission-config.dto";
 import { TaskStatus, TaskStatusType, TaskResultStatus, TaskResultType } from "@/lib/types/task/enum.bean";
-import { wsFluxKontextMax } from "@/app/actions/tool/ws-flux-kontext-max";
-import { wsFluxKontextMaxMulti } from "@/app/actions/tool/ws-flux-kontext-max-multi";
+import { TaskInfo } from "@/lib/types/task/task.bean";
+import { FluxDevUltraFastRequest } from "@/sdk/wavespeed/requests/flux-dev-ultra-fast.request";
+import { FluxKontextMaxMultiRequest } from "@/sdk/wavespeed/requests/flux-kontext-max-multi.request";
+import { FluxKontextMaxRequest } from "@/sdk/wavespeed/requests/flux-kontext-max.request";
+import { CODE } from "@/lib/unibean/metric-code";
 
 import { styles } from "@/config/styles";
 
@@ -50,6 +54,11 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
 
   const t = useTranslations("AiGenerator");
 
+  // 兼容：优先用selectedStyleId查找style，否则用selectedStyle
+  const style = selectedStyleId
+    ? styles.find((s) => s.id === selectedStyleId)
+    : selectedStyle;
+
   // Poll task status
   useEffect(() => {
     // Cleanup function
@@ -75,7 +84,7 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
     // Set polling interval
     pollingRef.current = setInterval(async () => {
       try {
-        const taskInfo = await wsFluxDevUltraFastStatus(id);
+        const taskInfo = await toolStatus(id);
         setTaskInfo(taskInfo);
 
         if (taskInfo.progress !== undefined) {
@@ -154,12 +163,12 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
       // 构造参数
       if (style?.isMulti) {
         // 多图
-        const params = {
-          prompt: textPrompt,
-          images: [uploadedImage, uploadedImage2].filter((img): img is string => Boolean(img)),
-          // 其他参数可按需补充
-        };
-        const taskInfo = await wsFluxKontextMaxMulti(params);
+        const multiTaskInfo = await FluxKontextMaxMultiRequest.create(textPrompt, [uploadedImage, uploadedImage2].filter((img): img is string => Boolean(img)), seed, guidanceScale, "2");
+        const taskInfo = await toolCall({
+          code: CODE.FluxKontextMaxMulti,
+          requestData: multiTaskInfo.value,
+        });
+        
         if (taskInfo.id) {
           setTaskId(taskInfo.id);
           startPolling(taskInfo.id);
@@ -170,19 +179,52 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
         }
       } else {
         // 单图
-        const params = {
-          prompt: textPrompt,
-          image: uploadedImage || undefined,
-          // 其他参数可按需补充
-        };
-        const taskInfo = await wsFluxKontextMax(params);
-        if (taskInfo.id) {
-          setTaskId(taskInfo.id);
-          startPolling(taskInfo.id);
+        console.log("Single image mode - uploadedImage:", uploadedImage);
+        if (uploadedImage) {
+          // 有上传图片时使用 image-to-image 模型
+          console.log("Using FluxKontextMaxRequest with image:", uploadedImage);
+          const singleTaskInfo = await FluxKontextMaxRequest.create(textPrompt, uploadedImage, seed, guidanceScale, true);
+          const taskInfo = await toolCall({
+            code: CODE.FluxKontextMax,
+            requestData: singleTaskInfo.value,
+          });
+
+          if (taskInfo.id) {
+            setTaskId(taskInfo.id);
+            startPolling(taskInfo.id);
+          } else {
+            setIsGenerating(false);
+            setErrorMessage(taskInfo.message || "Failed to submit image generation request");
+            toast.error(taskInfo.message || "Failed to start image generation");
+          }
         } else {
-          setIsGenerating(false);
-          setErrorMessage(taskInfo.message || "Failed to submit image generation request");
-          toast.error(taskInfo.message || "Failed to start image generation");
+          // 没有上传图片时使用 text-to-image 模型
+          console.log("No uploaded image, using FluxDevUltraFastRequest");
+          const request = FluxDevUltraFastRequest.create(
+            textPrompt,
+            undefined, // image
+            undefined, // mask_image
+            strength,
+            imageSize,
+            inferenceSteps,
+            seed,
+            guidanceScale,
+            numImages,
+          );
+
+          const taskInfo = await toolCall({
+            code: CODE.FluxDev,
+            requestData: request.value,
+          });
+
+          if (taskInfo.id) {
+            setTaskId(taskInfo.id);
+            startPolling(taskInfo.id);
+          } else {
+            setIsGenerating(false);
+            setErrorMessage(taskInfo.message || "Failed to submit image generation request");
+            toast.error(taskInfo.message || "Failed to start image generation");
+          }
         }
       }
     } catch (error) {
@@ -367,11 +409,6 @@ export default function AIGenerator({ selectedStyle, selectedStyleId }: { select
       });
     }
   };
-
-  // 兼容：优先用selectedStyleId查找style，否则用selectedStyle
-  const style = selectedStyleId
-    ? styles.find((s) => s.id === selectedStyleId)
-    : selectedStyle;
 
   // 新增：当style变化时，设置默认图片和提示词
   useEffect(() => {

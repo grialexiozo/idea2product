@@ -27,16 +27,14 @@ if (process.env.NODE_ENV === "development") {
   setupDevelopment();
 }
 
-
-
 const nextConfig: NextConfig = {
-  // Image domain configuration
+  // Image domain configuration   d2g64w682n9w0w.cloudfront.net
   images: {
-    domains: ["d2g64w682n9w0w.cloudfront.net"],
+    domains: ["rvdiumbinwadvchmkpbw.supabase.co", "localhost", "127.0.0.1"],
   },
   // Experimental features
   experimental: {
-    ppr: true,
+    ppr: false,
     clientSegmentCache: true,
     forceSwcTransforms: false,
   },
