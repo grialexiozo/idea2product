@@ -27,6 +27,8 @@ if (process.env.NODE_ENV === "development") {
   setupDevelopment();
 }
 
+
+
 const nextConfig: NextConfig = {
   // Image domain configuration
   images: {
