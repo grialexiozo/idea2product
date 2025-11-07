@@ -22,13 +22,7 @@ const ROUTE_PERMISSIONS = {
  * @param request NextRequest object
  * @returns Object containing Supabase client and NextResponse
  */
-export async function createSupabaseMiddlewareClient(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
-
+export function createSupabaseMiddlewareClient(request: NextRequest, response: NextResponse) {
   const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
     cookies: {
       getAll() {
@@ -36,14 +30,10 @@ export async function createSupabaseMiddlewareClient(request: NextRequest) {
       },
       setAll(cookiesToSet) {
         cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
-        response = NextResponse.next({
-          request,
-        });
         cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
       },
     },
   });
-  // await supabase.auth.getSession();
   return { supabase, response };
 }
 
@@ -105,8 +95,8 @@ export function isBasicRoute(path: string, routes: string[]) {
  * @param request NextRequest object
  * @returns NextResponse object
  */
-export async function updateSessionAndAuth(request: NextRequest) {
-  const { supabase, response } = await createSupabaseMiddlewareClient(request);
+export async function updateSessionAndAuth(request: NextRequest, response: NextResponse) {
+  const { supabase } = createSupabaseMiddlewareClient(request, response);
   const path = request.nextUrl.pathname;
   const method = request.method;
 

@@ -26,7 +26,12 @@ export const signIn = formActionWithPermission("sign_in", signInSchema, async (d
   const { user, error } = await supabaseAuthProvider.signInWithPassword(email, password);
 
   if (error) {
-    throw new AppError("AUTH_SIGN_IN_FAILED", error.message || t("signIn.failed"), { email });
+    return {
+      error: {
+        code: "AUTH_SIGN_IN_FAILED",
+        message: error.message || t("signIn.failed"),
+      },
+    };
   }
 
   const redirectTo = formData.get("redirect") as string | null;
@@ -36,7 +41,12 @@ export const signIn = formActionWithPermission("sign_in", signInSchema, async (d
   }
 
   if (!user) {
-    throw new AppError("AUTH_UNKNOWN_ERROR", t("signIn.noUser"));
+    return {
+      error: {
+        code: "AUTH_UNKNOWN_ERROR",
+        message: t("signIn.noUser"),
+      },
+    };
   }
 
   // Create or update user Profile
@@ -65,10 +75,12 @@ export const signIn = formActionWithPermission("sign_in", signInSchema, async (d
       });
     }
   } catch (profileError: any) {
-    throw new AppError("AUTH_PROFILE_CREATION_FAILED", `${t("signIn.profileCreationFailed")}${profileError.message}`, {
-      userId: user.id,
-      email: user.email,
-    });
+    return {
+      error: {
+        code: "AUTH_PROFILE_CREATION_FAILED",
+        message: `${t("signIn.profileCreationFailed")}${profileError.message}`,
+      },
+    };
   }
 
   return {

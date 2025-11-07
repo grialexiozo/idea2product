@@ -36,7 +36,7 @@ export default function AIGenerator() {
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
 
   // Image generation parameters
-  const [imageSize, setImageSize] = useState<string>("1024*1024");
+  const [imageSize, setImageSize] = useState<string>("2048*2048");
   const [numImages, setNumImages] = useState<number>(1);
   const [inferenceSteps, setInferenceSteps] = useState<number>(28);
   const [guidanceScale, setGuidanceScale] = useState<number>(3.5);

@@ -14,7 +14,8 @@ interface RequestConfig {
 }
 
 export default getRequestConfig(async ({locale}) => {
-  const resolvedLocale = locale || 'en';
+  const actualLocale = await (locale as any);
+  const resolvedLocale = actualLocale || 'en';
   return {
     locale: resolvedLocale,
     messages: (await import(`./i18n/${resolvedLocale}.json`)).default,

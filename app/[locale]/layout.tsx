@@ -1,9 +1,20 @@
-import { getMessages, getTimeZone, getNow } from "next-intl/server";
+import { getMessages, getTimeZone, getNow, getTranslations, getLocale } from "next-intl/server";
 import LocaleProvider from "../../components/locale-provider";
+import { Metadata } from "next";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
   params?: Promise<{ locale?: string }>;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {

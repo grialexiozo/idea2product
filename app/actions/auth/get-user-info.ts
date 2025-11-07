@@ -27,7 +27,6 @@ const EmptyProfileDTO: ProfileDTO = {
  * Requires 'view_profile' permission
  */
 export const getCurrentUserProfile = actionWithPermission("getCurrentUserProfile", async (userContext: UserContext): Promise<ProfileDTO> => {
-  const t = await getTranslations('AuthGetUserInfo');
   if (!userContext.id || userContext.authStatus !== AuthStatus.AUTHENTICATED) {
     return EmptyProfileDTO;
   }
@@ -40,7 +39,7 @@ export const getCurrentUserProfile = actionWithPermission("getCurrentUserProfile
 
     return ProfileMapper.toDTO(profile);
   } catch (error: any) {
-    console.error("Error fetching user profile:", error);
+    const t = await getTranslations('AuthGetUserInfo');
     throw new AppError("PROFILE_FETCH_FAILED", error.message || t('profileFetchFailed'));
   }
 });

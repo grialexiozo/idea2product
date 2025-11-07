@@ -1,0 +1,15 @@
+Submit Task:
+curl --location --request POST 'https://api.wavespeed.ai/api/v3/bytedance/seedream-v4' \
+--header "Content-Type: application/json" \
+--header "Authorization: Bearer ${WAVESPEED_API_KEY}" \
+--data-raw '{
+  "enable_base64_output": false,
+  "enable_sync_mode": false,
+  "prompt": "American retro style: a girl wearing a polka-dot dress with sunglasses adorning her head.",
+  "size": "2048*2048"
+}'
+
+
+Query Result:
+curl --location --request GET "https://api.wavespeed.ai/api/v3/predictions/${requestId}/result" \
+--header "Authorization: Bearer ${WAVESPEED_API_KEY}"

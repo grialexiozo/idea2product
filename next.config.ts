@@ -32,6 +32,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["kpkfvxxvdgwdbvpthqqr.supabase.co", "localhost", "127.0.0.1"],
   },
+  turbopack: {},
   // Experimental features
   experimental: {
     ppr: false,

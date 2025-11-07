@@ -1,0 +1,9 @@
+supabase database password: DataNapaDuu134supabse project 
+
+url: https://tzcfbqeciituhxspmcef.supabase.cosupabase 
+
+apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6Y2ZicWVjaWl0dWh4c3BtY2VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0NzUyOTgsImV4cCI6MjA3ODA1MTI5OH0.v54cSe-IctTsRTSvVRXdckWdimx8oVQCRmltGXdc9Ec
+
+openmeter apikey: om_4zvymz5T7Gwy83Hfd66bKV7qNzcmGWzf.Ja2nDa9orLdo-pj9c84b93EQ-SqTM-QwA7yc8PF4NKE
+
+wavespeedai api key: 480fa0403ea394df41484d4afbd7754eb060200764f11abd08281485c8ecfa55
